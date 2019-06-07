@@ -38,6 +38,4 @@ Suppose that you have an _n_-story building and plenty of eggs. Suppose also tha
 
 Write out your proposed algorithm in plain English or pseudocode and give the runtime complexity of your solution.
 ```
-I would have to throw 2 eggs to determine the value of f if n = 2 and f = 2 but if n = 2 and f = 1 or 0, I could find out f is 1 by throwing off the first floor first and wouldn't have to throw another egg. It would be important to test the first floor as the first attempt if it's not guarantee that f isn't zero and creates a boundary of assuring whether f is a positive number that's greater than 1.
-
-I could throw an egg at the floor n/2 in order to find larger values of f and larger values of n with a minimal amount of eggs being tossed. If the egg breaks, I would throw it t/2 times.
+Create a while loop and then inside the loop, create a for loop, for i in range(n - 1), i represents the floor and if i is greater than or equal to break_floor, print a statement saying, "Eggs will break from this height". If i is less than break_floor, print "It is okay to drop eggs from this height". This could be done n times with each loop, so it would be linear, O(n).
