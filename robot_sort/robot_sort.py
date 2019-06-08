@@ -92,12 +92,62 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def comparing_item_right(self):
+        #currently empty, pick up the item and move it to the right
+        self.swap_item()
+        self.move_right()
+
+        # if item's value is greater than 1, swap items and move them to the left
+        if self.compare_item() == 1:
+            self.swap_item()
+            self.move_left()
+            self.swap_item()
+            #item has been moved, lights are off and move along
+            self.move_right()
+            self.set_light_off()
+
+        else:
+            # put the item back to the left and keep moving
+            self.move_left()
+            self.swap_item()
+            self.move_right()
+
+    def comparing_item_left(self):
+        #opposite as above, currently empty, move to the left and pick up the item
+        self.swap_item()
+        self.move_left()
+        # if item is less than, swap items and move larger item to the right
+        if self.compare_item() == -1:
+            self.swap_item()
+            self.move_right()
+            self.swap_item()
+            # item has been moved, is empty, lights are turned off
+            self.move_left()
+            self.set_light_off()
+        else:
+            # item is larger, put the item back and keep moving
+            self.move_right()
+            self.swap_item()
+            self.move_left()
+
+    def move_trigger(self):
+        # compare right should start immediately while compare left should only work if the light has been turned off
+        self.set_light_on()
+        while self.can_move_right():
+            self.comparing_item_right()
+
+        if self.light_is_on() == False:
+            while self.can_move_left():
+                self.comparing_item_left()
+
     def sort(self):
         """
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # if the light is not on, it will trigger if it should move to the left or right
+        while self.light_is_on() == False:
+            self.move_trigger()
 
 
 if __name__ == "__main__":
